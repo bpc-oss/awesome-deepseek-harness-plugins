@@ -1,5 +1,7 @@
 # Awesome DeepSeek Harness Plugins
 
+> **中文导读**：这是 DeepSeek Harness（DSH）生态的插件精选列表，英文为主维护，中文说明见各章节标题下方。想直接上手的高星插件评测请看 [Hands-on Notes](#hands-on-notes)。
+
 A curated list of plugins, tools, skins, bridges, and extensions for
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH) — the
 open-source agent framework from DeepSeek, built on the motto
@@ -27,10 +29,14 @@ notable ones and points to the rest.
   - [Integrations & Bridges](#integrations--bridges)
   - [Sidebar, Workspace & Ecosystem](#sidebar-workspace--ecosystem)
   - [Fun & Misc](#fun--misc)
+- [Hands-on Notes](#hands-on-notes)
 - [Other awesome lists (meta)](#other-awesome-lists-meta)
 - [Contributing](#contributing)
+- [License](#license)
 
 ## How to install a plugin
+
+**中文**：DSH 把插件当作 [Cordis](https://github.com/cordiverse/cordis) bundle 加载，最常用的两条路：npm 包用 `dsh plugin add <npm-package>`，仓库托管（`.dsh-plugin` 形态）用 `github:<owner>/<repo>` 形式。
 
 DSH loads plugins as [Cordis](https://github.com/cordiverse/cordis) bundles.
 Two common paths:
@@ -52,6 +58,8 @@ dsh web            # http://127.0.0.1:3080
 
 ## Official built-in plugins
 
+**中文**：框架本体在 `@deepseek-ai/dsh-*` 这个 npm scope 下自带约 50 个内部插件包，是所有社区插件的参考实现与"接缝"底座（llm / shell / fs / web / subagent / plan / sandbox / hooks / skill …）。
+
 The framework itself ships ~50 internal plugin packages under the
 `@deepseek-ai/dsh-*` npm scope. They are the reference implementations and the
 building blocks every community plugin extends. Highlights:
@@ -69,6 +77,8 @@ Everything below is community-built and sits on top of these seams.
 
 ### Web UI & Skins
 
+**中文**：给 DSH 网页界面换肤、加任务看板、宠物、移动端远程等"界面增强"类插件。
+
 - [zhu1090093659/dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) (★300) — Plugin & skin collection for the DSH Web UI: task board, git graph, right-side panel, remote mobile UI, pet, live token stats, skin center.
 - [Small-tailqwq/dsh-deep-whale](https://github.com/Small-tailqwq/dsh-deep-whale) (★56) — "Whale-girl" skin series (maid-atelier), CC BY-NC-SA 4.0.
 - [Nagi-ovo/dsh-ads](https://github.com/Nagi-ovo/dsh-ads) (★61) — Tongue-in-cheek 2005-style Chinese-site ads in the sidebar / chat feed / popups.
@@ -82,6 +92,8 @@ Everything below is community-built and sits on top of these seams.
 
 ### Terminal & Desktop
 
+**中文**：把 DSH 从网页端带到终端、桌面，或做成独立 App / 启动器。
+
 - [ccch1mneyyy/dsh-cc-tui](https://github.com/ccch1mneyyy/dsh-cc-tui) (★96) — Claude Code-style full-screen TUI: pixel-whale top bar, live status row, streaming thoughts, double-Esc rollback, context bar + TPS meter. One-line npm install.
 - [huiliyi37/dsh-tianshu-tui](https://github.com/huiliyi37/dsh-tianshu-tui) (★53) — DSH terminal UI.
 - [chen-001/dsh-grok-tui](https://github.com/chen-001/dsh-grok-tui) (★5) — Grok-style TUI.
@@ -94,6 +106,8 @@ Everything below is community-built and sits on top of these seams.
 
 ### Vision & Multimodal
 
+**中文**：让纯文本模型也能"看图"：图像问答、长截图 OCR、UI 还原、像素比对等。
+
 - [Anionex/dsh-vision-toolkit](https://github.com/Anionex/dsh-vision-toolkit) (★106) — Vision toolkit for text-only models: intent-aware image Q&A, long-screenshot OCR, UI restoration, grounding, pixel diff, Artifacts, Web UI.
 - [zhouwumu2-lab/dsh-vision-fix](https://github.com/zhouwumu2-lab/dsh-vision-fix) (★10) — Vision fix / repair helper.
 - [sjscy05/deepseek-harness-vision-plugin](https://github.com/sjscy05/deepseek-harness-vision-plugin) — Vision plugin for DSH.
@@ -101,6 +115,8 @@ Everything below is community-built and sits on top of these seams.
 - [YYTbit/dsh-plugin-vision-toolkit](https://github.com/YYTbit/dsh-plugin-vision-toolkit) — Vision-toolkit bridge.
 
 ### Tools & Editor UX
+
+**中文**：编辑器体验增强、`@file` 引用、消息分支编辑、会话回滚等"好不好用全靠它"的小工具。
 
 - [omdsh-dev/dsh-at-file](https://github.com/omdsh-dev/dsh-at-file) (★21) — Codex-style `@file` mentions: search workspace files in the composer and attach their contents to prompts.
 - [omdsh-dev/dsh-custom-tool](https://github.com/omdsh-dev/dsh-custom-tool) (★17) — Create & manage sandboxed JavaScript tools with a Monaco editor and model-driven tool lifecycle.
@@ -115,6 +131,8 @@ Everything below is community-built and sits on top of these seams.
 
 ### Agent orchestration & Workflow
 
+**中文**：多 Agent 团队、可治理的工作流、会话蒸馏等"把一次性调度变成工程资产"的编排类插件。
+
 - [NanmiCoder/dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) (★30) — AgentTeams plugin for DSH.
 - [icetomoyo/dsh_workflow](https://github.com/icetomoyo/dsh_workflow) (★29) — Brings Claude Code's UltraCode to DSH; turns one-shot multi-agent dispatch into a generatable / savable / governable / observable / recoverable Workflow layer.
 - [btspoony/mstar-harness](https://github.com/btspoony/mstar-harness) (★38) — Skill-driven Harness / Loop Engineering Workflow Agent Plugin.
@@ -125,6 +143,8 @@ Everything below is community-built and sits on top of these seams.
 - [omdsh-dev/dsh-gomoku](https://github.com/omdsh-dev/dsh-gomoku) (★5) — Gomoku game plugin.
 
 ### Integrations & Bridges
+
+**中文**：把 DSH 接到 VS Code、桌面通知、或其它 Agent（Claude / Codex / Pi / OpenCode）的桥接类插件。
 
 - [omdsh-dev/dsh-open-in-vscode](https://github.com/omdsh-dev/dsh-open-in-vscode) (★28) — Open workspace directories in VS Code directly from the web GUI.
 - [omdsh-dev/dsh-notification](https://github.com/omdsh-dev/dsh-notification) (★19) — Desktop notifications for turn completions, with per-outcome controls and include/exclude keyword rules.
@@ -138,6 +158,8 @@ Everything below is community-built and sits on top of these seams.
 
 ### Sidebar, Workspace & Ecosystem
 
+**中文**：侧边栏工作台、`oh-my-dsh` 这类"插件库"、插件脚手架与注册表等生态基础设施。
+
 - [omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) (★66) — Full workbench sidebar with third-party tab registration: file render/edit, terminal, Git, subagent.
 - [LaplaceYoung/oh-my-dsh](https://github.com/LaplaceYoung/oh-my-dsh) (★12) — Plugin ecosystem: 700+ plugins wired only through extension seams, no agent-loop changes.
 - [kingjly/dsh-plugin-builder](https://github.com/kingjly/dsh-plugin-builder) (★1) — Plugin builder scaffolding.
@@ -150,10 +172,147 @@ Everything below is community-built and sits on top of these seams.
 
 ### Fun & Misc
 
+**中文**：合影墙、音乐、框架类实验等"好玩 / 杂项"插件。
+
 - [SenmuuuuW/dsh-group-photo](https://github.com/SenmuuuuW/dsh-group-photo) (★11) — Internal-test group-photo wall (GitHub OAuth, frozen allowlist).
 - [syy-shark/dsh-music-plugin](https://github.com/syy-shark/dsh-music-plugin) — Music plugin.
 - [unknowbug/RE-Framework](https://github.com/unknowbug/RE-Framework) (★5) / [unknowbug/anchorlaw](https://github.com/unknowbug/anchorlaw) (★4) — Frameworks.
 - [hxs996-beep/deepAct](https://github.com/hxs996-beep/deepAct) (★7) — deepAct.
+
+## Hands-on Notes
+
+**中文 · 实战评测**：下面挑了 6 个有代表性的高星插件，按"怎么装 / 怎么用 / 坑点"写成可直接照着做的短评测（star 数为 2026-08-13 当晚撰写时数据）。涉及 `dsh-external/*` 私有仓库的，已标注需要读取权限。
+
+**English · hands-on notes**: short, copy-pasteable reviews of six representative
+high-star plugins — install / use / gotchas. Star counts are from the night of
+2026-08-13. Entries under `dsh-external/*` are private repos and need read
+access.
+
+### dsh-web-ui — Web UI 全家桶（★311）
+
+**装**：npm 已发布到 `@linxin666` scope，推荐直接装聚合包：
+`dsh plugin --profile web add @linxin666/dsh-web-ui-all`；只要皮肤就装
+`@linxin666/dsh-skins`。装完重启 `dsh web`，侧边栏即出现全部入口。
+
+**用**：任务看板（支持 cron 定时让 DSH 会话自动执行，如每天升级 DSH / 周一生成周报）、
+Git 图谱、右侧预览面板（Markdown/HTML/代码/diff/CSV/PDF/Office/图片）、鲸鱼娘宠物、
+实时 TPS 与令牌统计、移动端远程控制、以及 SSH 远程运维（xterm 终端 / SFTP / 端口转发 /
+集群并发执行）。
+
+**坑**：首次安装若报 `ERR_PNPM_IGNORED_BUILDS`，按提示把 `cloudflared` / `ssh2` 等加入
+profile 的 `pnpm-workspace.yaml` 的 `allowBuilds` 再重跑。验证是否挂上可用
+`dsh --profile web --dump-config`。
+
+*Install `@linxin666/dsh-web-ui-all` to get the whole bundle (task board, git
+graph, right panel, pet, live token stats, mobile remote, SSH ops). Add
+`@linxin666/dsh-skins` for skins only. Restart `dsh web` after install. If you
+hit `ERR_PNPM_IGNORED_BUILDS`, allowlist `cloudflared`/`ssh2` in the profile's
+`allowBuilds`.*
+
+### dsh-cc-tui — Claude Code 风格全屏终端（★103）
+
+**装**：`dsh plugin --profile cc-tui add dsh-cc-tui`（会自动初始化 `cc-tui`
+profile），然后 `dsh --profile cc-tui` 启动；或仓库根目录 `sh install.sh`
+（Windows 用 `dsh-cc.cmd`，支持 `--resume` 恢复上次会话）。
+
+**用**：像素鲸鱼顶栏 + 启动手绘动画、实时工作状态行（在跑哪个工具 / 思考文案）、
+思考过程流式展开、双击 Esc 时间回溯（fork 重放历史消息）、底部蓝白上下文进度条 +
+TPS 仪表、复刻 CC 的 `/` 命令菜单（`/plan` `/goal` `/compact` `/review` 等全部走官方链路）。
+
+**坑**：需要官方 `dsh` CLI 与 `pnpm`；纯插件挂载，卸载即完全还原。它**不消费审批流**
+（`/permissions` 仅说明现状）；`/model` 实时切换走"会话 fork 续聊"而非原位换模型。
+
+*A Claude-Code-style full-screen TUI: pixel-whale banner, live status row,
+streaming thinking, double-Esc rewind (fork + replay), context bar + TPS meter,
+and CC-style `/` commands that all ride DSH's official services. Pure Cordis
+mount — removing the plugin fully restores the host. No approval-flow UI yet.*
+
+### DSH-better-sidebar — 侧边栏完整工作台（★71）
+
+**装**：npm 已发布 `dsh-better-sidebar@0.10.2`：
+`dsh plugin --profile web add dsh-better-sidebar@0.10.2`，装完重启 DSH 并硬刷新
+（Cmd/Ctrl+Shift+R）。嫌麻烦可 `curl -fsSL <repo>/scripts/install.sh | bash`，脚本会
+自动处理 `allowBuilds` 与旧挂载行。
+
+**用**：右侧栏 + 底部面板双工作台——资源管理器（懒加载目录树、`@文件` 引用）、
+CodeMirror 编辑预览（Office/PDF/HTML 沙箱 iframe）、内嵌浏览器（沙箱 iframe）、
+xterm 真实终端（每会话最多 3 个）、Git 面板（真 diff + 暂存/提交）、后台任务页。
+暴露 `ctx.betterSidebar` 服务，其它插件可注册侧边栏 Tab 与文件预览器。
+
+**坑**：pnpm 11 的 `strict-dep-builds` 可能拦截 `node-pty` 构建，执行
+`pnpm approve-builds --all` 再重跑；Git 面板无 push/pull/fetch；
+`.xlsx` 不保留单元格样式，Office 预览约 23MB 首次较慢。
+
+*Right-sidebar + bottom-panel workbench: file explorer, CodeMirror editor with
+Office/PDF/HTML preview, sandboxed in-app browser, real xterm terminal, git
+panel, background-task view. Exposes `ctx.betterSidebar` so other plugins can
+register tabs/viewers. On pnpm 11 run `pnpm approve-builds --all` if node-pty's
+build is ignored. Git panel has no push/pull; Office preview is ~23MB on first load.*
+
+### dsh-vision-toolkit — 让纯文本模型"看见"（★110，私有仓库）
+
+**装**：目前是 `dsh-external` 私有 GitHub release，需对该仓库的读取权限。
+`git clone https://github.com/dsh-external/dsh-vision-toolkit.git` 后
+`dsh plugin --profile web add "$PWD/dsh-vision-toolkit"`（Web 和 Headless 各加一次）。
+Web 端进 **Settings → Vision Toolkit**，配一个 DSH Credential（如 `VISION_API_KEY`）
+并点 **Test connection**。
+
+**用**：会话里把图片放进 workspace 路径，调用 `/vision-tools` 激活，再让 Agent 用
+`vision_glance`（图像问答）、`vision_ground`/`vision_detect`（定位框）、
+`vision_crop`/`vision_trace`（裁剪/转 SVG）、`vision_pixel_diff`（像素比对）、
+`vision_long_screenshot_ocr`（长截图 OCR）等 10 个工具。本地裁剪 / trace / 像素差
+**不需要**视觉 API；远程识别需一个 OpenAI 兼容视觉端点（managed runtime 会自动装好
+Python 3.11+ 环境）。
+
+**坑**：私有仓库，没权限 `git clone` 会失败；远程工具需要配 Credential，否则只有本地
+工具可用。
+
+*Gives text-only DSH agents eyes via 10 structured vision tools (Q&A, grounding,
+OCR, pixel diff, UI restoration…). Private `dsh-external` repo — needs read
+access. Local crop/trace/diff need no vision API; remote recognition needs an
+OpenAI-compatible endpoint configured as a DSH Credential. Managed runtime
+auto-prepares Python 3.11+.*
+
+### oh-my-dsh — 687 个插件的能力库（23 轮差距登记，5286 测试全绿）
+
+**定位**：从 opencode / oh-my-pi / Codex / Claude Code / pi / Goose 等对照，把有用能力
+以 DSH 插件形态重写——**只走扩展接缝**（`ctx.effect()` / `ctx.on()` / `ctx.tools`），
+不改 agent-loop、不引入热路径开销。已登记 23 轮差距、687 个插件。
+
+**用**：仓库按 `plugins/<gap-id>/` 组织，每个都是独立 DSH 插件。
+`pnpm install && pnpm test` 跑全部；单个插件 `cd plugins/<gap-id> && pnpm test`。
+端到端验证（`e2e/run-e2e.sh`）需要 `DSH_HOME/.env` 里的 `DEEPSEEK_API_KEY`。
+
+**坑**：这是插件"**源码库 / 能力库**"，不是一条 `dsh plugin add` 就能装全家桶的聚合包；
+要按需挑选具体插件单独安装。
+
+*A capability library: 687 plugins rewritten from opencode / Claude Code / Codex /
+pi / Goose etc., all through DSH's extension seams (no agent-loop changes). 5286
+tests green. It's a source/ability repo, not a one-line aggregate — pick and
+install individual plugins under `plugins/<gap-id>/`. e2e needs `DEEPSEEK_API_KEY`.*
+
+### dsh_workflow — 把多 Agent 调度升级成可治理 Workflow（★30，私有仓库）
+
+**装**：`dsh-external` 私有仓库，
+`dsh plugin --profile web add "github:dsh-external/dsh_workflow#main"`，
+`dsh --profile web --dump-config` 验证配置里出现 `dsh-external-workflow` 行后重启。
+
+**用**：会话里 `/workflow list` 看内置/项目/个人 workflow；`/workflow parallel-investigation
+{"question":"…"}` 跑并行调研；`/workflow create 设计一个并行安全评审流程` 现场生成；
+`/workflow review --risk high --requirement "不得破坏公开 API" --wait` 跑受控评审。
+支持命名/项目/个人 workflow、run graph、暂停/恢复/重跑/续跑、成本记录，以及
+capability-only VM（QuickJS WASM）安全边界。
+
+**坑**：需 Node >=22.19 且与 `compatibility.json` 一致的 DSH 快照；`github:` 安装需对该
+私有仓库读取权限；`/workflow create` 形式**不接受** `--wait`，同步等待请用命名 workflow
+的 `--wait`。同类多 Agent 主题另见 `dsh-agent-teams`。
+
+*Upgrades one-shot multi-agent dispatch into a governable Workflow layer:
+named/project/personal workflows, run graph, pause/resume/rerun, cost records,
+and a QuickJS-WASM capability-only sandbox. Private `dsh-external` repo —
+`github:` install needs read access and Node >=22.19. `/workflow create` does not
+accept `--wait`; use it on named workflows. For teams of agents, see
+`dsh-agent-teams`.*
 
 ## Other awesome lists (meta)
 
@@ -168,6 +327,13 @@ with daily compatibility tracking:
 - [walkinglabs/awesome-deepseek-harness-plugins](https://github.com/walkinglabs/awesome-deepseek-harness-plugins) (★1)
 
 ## Contributing
+
+**中文**：做了或发现一个插件？两步让它被搜到——
+1. 给你的 GitHub 仓库打上 **`dsh-plugin`** 话题；
+2. 提一个 PR，把它加进上面合适的分类（附一句话描述与当时的 star 数）。
+
+自动生成的 [PLUGINS.md](PLUGINS.md) 由 [update.yml](.github/workflows/update.yml)
+每天从 `dsh-plugin` 话题刷新，无需手动维护；但精选列表保持人工维护。
 
 Found or built a plugin? Make it discoverable:
 
