@@ -155,6 +155,7 @@ Everything below is community-built and sits on top of these seams.
 - [YYTbit/dsh-plugin-opencode-bridge](https://github.com/YYTbit/dsh-plugin-opencode-bridge) — Bridge to OpenCode.
 - [bobleer/deepseek-harness-plugin-mcp](https://github.com/bobleer/deepseek-harness-plugin-mcp) — MCP plugin.
 - [yoke233/dsh-openai-codex-auth](https://github.com/yoke233/dsh-openai-codex-auth) (★1) — OpenAI Codex auth.
+- [vvlife/dsh-agnes-paseo](https://github.com/vvlife/dsh-agnes-paseo) — Agnes AI model gateway (OpenAI-compatible) for dsh, plus a zero-dependency ACP bridge that registers DeepSeek Harness as a Paseo provider.
 
 ### Sidebar, Workspace & Ecosystem
 
