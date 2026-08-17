@@ -1,0 +1,73 @@
+name: Review plugin submission
+
+# Rule-based auto-review of plugin-submission PRs (Channel B in CONTRIBUTING.md).
+# Replaces manual curation: when a PR only edits README.md and every newly added
+# repo passes the rules, it is auto-labeled `auto-approved` and squash-merged.
+#
+# SECURITY: this uses `pull_request_target` so it can comment / label / merge
+# fork PRs. It deliberately NEVER checks out or executes PR code — the review
+# script (scripts/review_pr.py, taken from the trusted BASE branch) only reads
+# the PR's README.md at the head SHA via the GitHub API.
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4          # base repo (trusted), not the PR
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run rule-based review
+        id: review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python scripts/review_pr.py | tee review_report.md
+          echo "pass=$(python -c "import json;print(str(json.load(open('review_result.json'))['pass']).lower())")" >> "$GITHUB_OUTPUT"
+
+      - name: Post / update PR comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          # remove previous bot comments for this PR, then post a fresh one
+          EXISTING=$(gh api "repos/$REPO/issues/$PR/comments" \
+            --jq '.[] | select(.user.login=="github-actions[bot]" and (.body|test("Plugin submission review"))) | .id')
+          for id in $EXISTING; do
+            gh api -X DELETE "repos/$REPO/issues/comments/$id" >/dev/null 2>&1 || true
+          done
+          gh pr comment "$PR" --body-file review_report.md
+
+      - name: Apply labels
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          LABELS=$(python -c "import json;print(' '.join(json.load(open('review_result.json'))['labels']))")
+          for l in auto-approved needs-review changes-requested; do
+            gh pr edit "$PR" --remove-label "$l" 2>/dev/null || true
+          done
+          for l in $LABELS; do
+            gh pr edit "$PR" --add-label "$l" 2>/dev/null || true
+          done
+
+      - name: Auto-merge if approved
+        if: ${{ fromJSON(steps.review.outputs.pass || 'false') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr merge "$PR" --squash --delete-branch=false \
+            || echo "auto-merge was blocked (branch not up-to-date or protected); a maintainer can merge manually."

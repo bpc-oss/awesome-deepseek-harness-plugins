@@ -350,22 +350,51 @@ with daily compatibility tracking:
 
 ## Contributing
 
-**中文**：做了或发现一个插件？两步让它被搜到——
-1. 给你的 GitHub 仓库打上 **`dsh-plugin`** 话题；
-2. 提一个 PR，把它加进上面合适的分类（附一句话描述与当时的 star 数）。
+**中文**：两种方式让插件被收录，二选一即可——
 
-自动生成的 [PLUGINS.md](PLUGINS.md) 由 [update.yml](.github/workflows/update.yml)
-每天从 `dsh-plugin` 话题刷新，无需手动维护；但精选列表保持人工维护。
+**通道 A · 零维护（推荐）**：直接给你的 GitHub 仓库打上 **`dsh-plugin`** 话题。
+[PLUGINS.md](PLUGINS.md) 由 [update.yml](.github/workflows/update.yml) 每天从
+该话题自动抓取刷新，**无需提 PR**，约 24 小时内就会出现在快照里。
 
-Found or built a plugin? Make it discoverable:
+**通道 B · 进精选列表**：想进上面人工分类的精选 README？提一个 PR，把它加到合适的
+分类（附一句话描述与当时的 star 数）。这个 PR 会被
+[review-pr.yml](.github/workflows/review-pr.yml) **按规则自动审核**：
 
-1. Add the **`dsh-plugin`** topic to your GitHub repository.
-2. Open a pull request adding it to the right category above (include a one-line
-   description and the star count snapshot).
+- ✅ 只能改 `README.md`（不能顺手改其他文件）；
+- ✅ 新增的每个仓库必须公开存在；
+- ✅ 必须明显是 DSH 插件——要么带 `dsh-plugin` 话题，要么名称/描述里出现
+  DeepSeek Harness / DSH / Cordis / 外挂 / 插件 等字样；
+- ✅ 不能与已有条目重复；
+- ⚠️ `dsh plugin add <pkg>` 安装命令需格式正确。
 
-The auto-generated [PLUGINS.md](PLUGINS.md) is refreshed daily from the
-`dsh-plugin` topic by [update.yml](.github/workflows/update.yml) — no manual
-entry needed there, but the curated list stays human-maintained.
+全部通过会打 `auto-approved` 标签并**自动合并**；不通过会打 `changes-requested`
+并指出原因，改完重推即可。维护者仍可随时人工覆盖。
+
+完整规则见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+Found or built a plugin? Make it discoverable — pick either:
+
+**Channel A · Zero maintenance (recommended):** just add the **`dsh-plugin`**
+topic to your GitHub repo. [PLUGINS.md](PLUGINS.md) is fetched daily from that
+topic by [update.yml](.github/workflows/update.yml) — no PR needed; it appears in
+the snapshot within ~24h.
+
+**Channel B · Curated list:** want it in the categorized README above? Open a PR
+adding it to the right section (one-line description + star snapshot). The PR is
+**auto-reviewed by rules** via [review-pr.yml](.github/workflows/review-pr.yml):
+
+- ✅ Only `README.md` may be changed.
+- ✅ Every added repo must exist and be public.
+- ✅ Must be clearly DSH-related: carry the `dsh-plugin` topic, or mention
+  DeepSeek Harness / DSH / Cordis / 外挂 / 插件 in name or description.
+- ✅ No duplicates of existing entries.
+- ⚠️ `dsh plugin add <pkg>` install commands must be well formed.
+
+All checks pass → auto-labeled `auto-approved` and **auto-merged**. Otherwise
+`changes-requested` with reasons; push a fix to re-run. A maintainer can still
+override at any time.
+
+Full rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

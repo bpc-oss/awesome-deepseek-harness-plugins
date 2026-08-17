@@ -11,7 +11,14 @@ Strategy:
     mention those words, which pollutes the list.
   * Page through all results (GitHub caps search at 1000 hits / 10 pages).
   * Keep only entries whose name or description references DeepSeek / Harness /
-    DSH / Cordis, so mistagged non-DSH repos are dropped.
+    DSH / Cordis, so mistagged non-DSH repos are dropped. The signal set also
+    includes common Chinese terms (外挂 / 插件 / 深度求索) used by the
+    Chinese-speaking community, so repos described only in Chinese are not
+    silently dropped.
+
+  * Output is deterministic: the header carries NO generation date, so the
+    daily workflow only commits when the plugin SET actually changes (no
+    date-only noise commits). The refresh date is the git commit date.
 
     python scripts/fetch_plugins.py > PLUGINS.md
 """
@@ -20,11 +27,15 @@ import os
 import sys
 import urllib.parse
 import urllib.request
-import datetime
 
 API = "https://api.github.com/search/repositories"
 QUERY = "topic:dsh-plugin"
-SIGNAL = ("deepseek", "harness", "dsh", "cordis", "deepseek-ai")
+# English + Chinese relevance signals. `dsh-plugin` topic already restricts the
+# result set; these keywords drop mistagged non-DSH repos (in either language).
+SIGNAL = (
+    "deepseek", "harness", "dsh", "cordis", "deepseek-ai", "cordiverse",
+    "外挂", "插件", "深度求索",
+)
 HEADERS = {"Accept": "application/vnd.github+json"}
 token = os.environ.get("GITHUB_TOKEN")
 if token:
@@ -69,14 +80,14 @@ def main() -> None:
         page += 1
 
     items = sorted(seen.values(), key=lambda x: x["stargazers_count"], reverse=True)
-    today = datetime.date.today().isoformat()
     lines = [
         "# DSH Plugins Snapshot",
         "",
-        f"> Auto-generated from the GitHub Search API on {today}. This index is "
-        "built from the `dsh-plugin` topic and filtered to DeepSeek-Harness-"
-        "related repos; it is sorted by stars and NOT hand-curated. For the "
-        "curated, categorized view see [README.md](README.md).",
+        "> Auto-generated from the GitHub Search API. This index is built from "
+        "the `dsh-plugin` topic and filtered to DeepSeek-Harness-related repos "
+        "(English + Chinese relevance signals); it is sorted by stars and NOT "
+        "hand-curated. The refresh date is the git commit date of this file. "
+        "For the curated, categorized view see [README.md](README.md).",
         "",
         "To refresh: `python scripts/fetch_plugins.py > PLUGINS.md`",
         "",
